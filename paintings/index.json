@@ -1,0 +1,41 @@
+[
+{
+  "title": "N2B",
+  "img": "/images/uploads/gp_rwxoawamyg0n.jpg",
+  "size": "40x50",
+  "price": 120,
+  "available": true,
+  "category": "red"
+},
+{
+  "title": "N2BP",
+  "img": "/images/uploads/gp_rwxoawamyg0n.jpg",
+  "size": "40x50",
+  "price": 120,
+  "available": true,
+  "category": "red"
+},
+{
+  "title": "Nier",
+  "img": "/images/uploads/gp_rwxoawamyg0n.jpg",
+  "size": "50x70",
+  "price": 120,
+  "available": true,
+  "category": "red"
+},
+{
+  "title": "Nier2B2",
+  "img": "/images/uploads/gp_rwxoawamyg0n.jpg",
+  "size": "40x50",
+  "price": 120,
+  "available": true,
+  "category": "red"
+},
+{
+  "title": "paint2",
+  "img": "/images/uploads/gp_rwxoawamyg0n.jpg",
+  "size": "40x50",
+  "price": 120,
+  "available": true,
+  "category": "red"
+}]
