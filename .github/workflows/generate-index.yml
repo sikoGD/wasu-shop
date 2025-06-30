@@ -1,4 +1,4 @@
-name: Generate paintings index
+name: Generate index.json for Paintings
 
 on:
   push:
@@ -7,31 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-index:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Generate index.json
         run: |
-          mkdir -p paintings
           echo "[" > paintings/index.json
           first=true
           for file in paintings/*.json; do
-            if [ "$file" != "paintings/index.json" ]; then
-              if [ "$first" = true ]; then
-                first=false
-              else
-                echo "," >> paintings/index.json
-              fi
-              cat "$file" >> paintings/index.json
+            [ "$file" = "paintings/index.json" ] && continue
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo "," >> paintings/index.json
             fi
+            cat "$file" >> paintings/index.json
           done
           echo "]" >> paintings/index.json
 
-      - name: Push changes
+      - name: Commit and push index.json
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
