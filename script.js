@@ -1,24 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
   async function fetchPaintings() {
-    try {
-      const res = await fetch("paintings/paintings.json");
-      const paintings = await res.json();
+    const redPaintings = [];
+    const bluePaintings = [];
 
-      const redPaintings = paintings.filter(p => p.category === "red" && p.available);
-      const bluePaintings = paintings.filter(p => p.category === "blue" && p.available);
+    try {
+      // Get a list of all painting JSON files in the /paintings folder
+      const res = await fetch("/paintings/index.json");
+      const paintingFiles = await res.json();
+
+      for (let file of paintingFiles) {
+        const res = await fetch(`/paintings/${file}`);
+        const painting = await res.json();
+
+        if (!painting.available) continue;
+
+        if (painting.category === "red") {
+          redPaintings.push(painting);
+        } else if (painting.category === "blue") {
+          bluePaintings.push(painting);
+        }
+      }
 
       renderPaintings(redPaintings, ".red-category .items");
       renderPaintings(bluePaintings, ".blue-category .items");
     } catch (err) {
-      console.error("Failed to load paintings.json", err);
+      console.error("Error loading paintings", err);
     }
   }
 
   function renderPaintings(paintings, containerSelector) {
     const container = document.querySelector(containerSelector);
     if (!container) return;
-
-    container.innerHTML = ""; // Clear previous items
+    container.innerHTML = "";
 
     paintings.forEach((p) => {
       const item = document.createElement("div");
@@ -35,8 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  fetchPaintings();
-
+  // Modal logic
   const modal = document.getElementById("modal");
   const modalContent = document.querySelector(".modal-content");
 
@@ -73,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("hidden");
     }
   });
+
+  fetchPaintings();
 });
 
 window.addEventListener("scroll", () => {
