@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Red Motion",
+    "size": "40×50 cm",
+    "price": 1200,
+    "img": "https://pbs.twimg.com/media/Gjr0Hh1aAAAz9RG?format=jpg&name=large",
+    "available": true,
+    "category": "red"
+  },
+  {
+    "title": "Ocean Calm",
+    "size": "30×40 cm",
+    "price": 950,
+    "img": "https://pbs.twimg.com/media/GqEq43tbMAAgbwn?format=jpg&name=large",
+    "available": true,
+    "category": "blue"
+  }
+]

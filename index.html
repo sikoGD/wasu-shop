@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wasu Shop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="header-image"></div>
+    <header>
+      <div class="logo">WASU</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="contact.html" target="_blank">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="featured">
+        <h1>Featured Artwork</h1>
+        <!-- We'll add featured products here later -->
+      </section>
+
+      <section class="category red-category">
+        <h2>「SEASON 01」</h2>
+        <div class="items"></div>
+      </section>
+
+      <section class="category blue-category">
+        <h2>「SEASON 02」</h2>
+        <div class="items"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 wasu. All rights reserved.</p>
+    </footer>
+    <div id="modal" class="hidden">
+        <div class="modal-content">
+          <span id="close-modal">&times;</span>
+          <div class="modal-inner">
+            <img id="modal-img" src="" alt="" style="max-width: 100%;" />
+            <h3 id="modal-title"></h3>
+            <p id="modal-size"></p>
+            <p id="modal-price"></p>
+      
+            <form name="purchase" method="POST" data-netlify="true" netlify action="thank-you.html">
+              <input type="hidden" name="title" id="form-title" />
+              <input type="hidden" name="size" id="form-size" />
+              <input type="hidden" name="price" id="form-price" />
+      
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input type="email" name="email" placeholder="Email Address" required />
+              <textarea name="address" id="form-address" rows="7" placeholder="Shipping Address" required></textarea>
+      
+              <button type="submit">Confirm Request</button>
+            </form>
+          </div>
+        </div>
+      </div>        
+  </body>
+</html>
