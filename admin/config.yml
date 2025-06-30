@@ -6,17 +6,17 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - label: "Paintings"
-    name: "paintings"
+  - name: "paintings"
+    label: "Paintings"
+    folder: "paintings"
+    create: true
     format: "json"
-    files:
-      - label: "All Paintings"
-        name: "all_paintings"
-        file: "paintings/paintings.json"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Image", name: "img", widget: "image" }
-          - { label: "Size", name: "size", widget: "string" }
-          - { label: "Price", name: "price", widget: "number" }
-          - { label: "Available", name: "available", widget: "boolean" }
-          - { label: "Category", name: "category", widget: "select", options: ["red", "blue"] }
+    extension: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "img", widget: "image" }
+      - { label: "Size", name: "size", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Available", name: "available", widget: "boolean" }
+      - { label: "Category", name: "category", widget: "select", options: ["red", "blue"] }
