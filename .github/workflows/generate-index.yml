@@ -1,30 +1,40 @@
-name: Generate Painting Index
+name: Generate paintings index
 
 on:
   push:
     paths:
       - 'paintings/*.json'
+  workflow_dispatch:
 
 jobs:
-  update-index:
+  generate-index:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Generate index.json
         run: |
+          mkdir -p paintings
           echo "[" > paintings/index.json
-          find paintings -type f -name "*.json" ! -name "index.json" \
-            | sed 's|paintings/||' \
-            | sed 's|^|  "|;s|$|"|' \
-            | paste -sd, - >> paintings/index.json
+          first=true
+          for file in paintings/*.json; do
+            if [ "$file" != "paintings/index.json" ]; then
+              if [ "$first" = true ]; then
+                first=false
+              else
+                echo "," >> paintings/index.json
+              fi
+              cat "$file" >> paintings/index.json
+            fi
+          done
           echo "]" >> paintings/index.json
 
-      - name: Commit index.json
+      - name: Push changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add paintings/index.json
           git commit -m "🧩 Update paintings/index.json" || echo "No changes"
-          git push
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }} HEAD:main
