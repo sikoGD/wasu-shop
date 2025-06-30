@@ -4,14 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const bluePaintings = [];
 
     try {
-      // Get a list of all painting JSON files in the /paintings folder
+      // Fetch all paintings data directly from index.json
       const res = await fetch("/paintings/index.json");
-      const paintingFiles = await res.json();
+      const paintings = await res.json();
 
-      for (let file of paintingFiles) {
-        const res = await fetch(`/paintings/${file}`);
-        const painting = await res.json();
-
+      for (let painting of paintings) {
         if (!painting.available) continue;
 
         if (painting.category === "red") {
@@ -31,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderPaintings(paintings, containerSelector) {
     const container = document.querySelector(containerSelector);
     if (!container) return;
-    container.innerHTML = "";
+
+    container.innerHTML = ""; // Clear previous items
 
     paintings.forEach((p) => {
       const item = document.createElement("div");
