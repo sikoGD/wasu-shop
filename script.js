@@ -1,53 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   async function fetchPaintings() {
-    const redPaintings = [];
-    const bluePaintings = [];
+    try {
+      const res = await fetch("paintings/paintings.json");
+      const paintings = await res.json();
 
-    // List of painting filenames (manually added or generated automatically if using a static site generator)
-    const files = [
-      "paintings/red-motion.md",
-      "paintings/ocean-calm.md",
-      // Add more here or auto-generate with a build step
-    ];
+      const redPaintings = paintings.filter(p => p.category === "red" && p.available);
+      const bluePaintings = paintings.filter(p => p.category === "blue" && p.available);
 
-    for (let file of files) {
-      try {
-        const res = await fetch(file);
-        const text = await res.text();
-
-        const frontmatter = parseFrontMatter(text);
-        if (!frontmatter || !frontmatter.available) continue;
-
-        if (frontmatter.category === "red") {
-          redPaintings.push(frontmatter);
-        } else if (frontmatter.category === "blue") {
-          bluePaintings.push(frontmatter);
-        }
-      } catch (err) {
-        console.error(`Error loading ${file}`, err);
-      }
+      renderPaintings(redPaintings, ".red-category .items");
+      renderPaintings(bluePaintings, ".blue-category .items");
+    } catch (err) {
+      console.error("Failed to load paintings.json", err);
     }
-
-    renderPaintings(redPaintings, ".red-category .items");
-    renderPaintings(bluePaintings, ".blue-category .items");
-  }
-
-  function parseFrontMatter(mdText) {
-    const match = /^---\n([\s\S]+?)\n---/.exec(mdText);
-    if (!match) return null;
-
-    const yaml = match[1];
-    const data = {};
-    yaml.split("\n").forEach(line => {
-      const [key, ...rest] = line.split(":");
-      const value = rest.join(":").trim();
-      if (value === "true") data[key.trim()] = true;
-      else if (value === "false") data[key.trim()] = false;
-      else if (!isNaN(value)) data[key.trim()] = Number(value);
-      else data[key.trim()] = value.replace(/^"|"$/g, "");
-    });
-
-    return data;
   }
 
   function renderPaintings(paintings, containerSelector) {
@@ -77,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalContent = document.querySelector(".modal-content");
 
   document.body.addEventListener("click", (e) => {
-    // Handle Buy Now click
     if (e.target.tagName === "BUTTON" && e.target.textContent.trim() === "Request") {
       const item = e.target.closest(".item");
       if (!item) return;
@@ -99,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("show");
     }
 
-    // Handle close
     if (e.target.id === "close-modal") {
       modal.classList.remove("show");
       modal.classList.add("hidden");
