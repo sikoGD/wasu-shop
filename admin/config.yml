@@ -17,4 +17,4 @@ collections:
       - { label: "Size", name: "size", widget: "string" }
       - { label: "Price", name: "price", widget: "number" }
       - { label: "Available", name: "available", widget: "boolean" }
-      - { label: "Category", name: "category", widget: "select", options: ["red-category", "blue-category"] }
+      - { label: "Category", name: "category", widget: "select", options: ["red", "blue"] }
