@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main # or "master" depending on your repo
+  branch: main
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
@@ -8,8 +8,8 @@ public_folder: "/images/uploads"
 collections:
   - name: "paintings"
     label: "Paintings"
-    file: "paintings/paintings.json"
     format: "json"
+    file: "paintings/paintings.json"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "img", widget: "image" }
