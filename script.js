@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const paintings = await res.json();
 
       for (let painting of paintings) {
-        if (!painting.available) continue;
-
         if (painting.category === "red") {
           redPaintings.push(painting);
         } else if (painting.category === "blue") {
