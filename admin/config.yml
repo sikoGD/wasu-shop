@@ -8,9 +8,8 @@ public_folder: "/images/uploads"
 collections:
   - name: "paintings"
     label: "Paintings"
-    folder: "paintings"
-    create: true
-    slug: "{{slug}}"
+    file: "paintings/paintings.json"
+    format: "json"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "img", widget: "image" }
