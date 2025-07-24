@@ -71,6 +71,8 @@
     text-align: center;
     background-color: #fafafa;
     transition: transform 0.2s ease;
+    flex: 1 1 calc(25% - 30px);
+    max-width: calc(25% - 30px);
   }
   .item:hover {
     transform: scale(1.03);
@@ -81,13 +83,16 @@
     height: auto;
     max-height: 320px;
     object-fit: cover;
+    display: block;
   }  
   .item h4 {
     margin: 10px 0 5px;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
   }
   .item p {
     font-size: 0.9rem;
     color: #555;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
   }
   .item button {
     margin-top: 10px;
@@ -103,6 +108,14 @@
     border-radius: 5px;
     cursor: not-allowed;
   }
+
+.item button:focus {
+  outline: 2px solid #000;
+}
+
+nav a:focus {
+  outline: 2px solid #000;
+}
   
   /* Footer */
   footer {
@@ -264,3 +277,68 @@
   #close-modal {
     cursor: pointer;
   }
+/* Tablets (~768px and below): 2 columns */
+@media (max-width: 768px) {
+  .item {
+    flex: 1 1 calc(50% - 30px);
+    max-width: calc(50% - 30px);
+  }
+}
+
+/* Phones (~480px and below): 1 column */
+@media (max-width: 480px) {
+  .item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .item h4 {
+    font-size: 1.1rem;
+  }
+  .item p {
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 480px) {
+  .item h4 {
+    font-size: 1rem;
+  }
+  .item p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 10px;
+    padding-top: 280px;
+  }
+
+  header {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    margin-top: 10px;
+  }
+}
